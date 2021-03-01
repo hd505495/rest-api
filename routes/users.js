@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const User = require('../models/user');
 
 // Get all users
 router.get('/', (req, res) => {
@@ -17,13 +18,12 @@ router.get('/:id', (req, res) => {
 });
 
 // Create one user
-router.post('/', (req, res) => {
-  //console.log(req.body);
-  res.send({
-    Method: req.method,
-    name: req.body.name,
-    username: req.body.username
-  });
+router.post('/', (req, res, next) => {
+  // call mongoose create method on User model (saves user instance to db)
+  // and return saved object to client
+  User.create(req.body).then((user) => {
+    res.send(user);
+  }).catch(next);
 });
 
 // Update one user by id
