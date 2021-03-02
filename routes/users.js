@@ -28,17 +28,17 @@ router.post('/', (req, res, next) => {
 
 // Update one user by id
 router.put('/:id', (req, res) => {
-  res.send({
-    Method: req.method,
-    id: req.params.id
+  User.findByIdAndUpdate({_id: req.params.id}, req.body).then(() => {
+    User.findOne({_id: req.params.id}).then((user) => {
+      res.send(user);
+    });
   });
 });
 
 // Delete one user by id
 router.delete('/:id', (req, res) => {
-  res.send({
-    Method: req.method,
-    id: req.params.id
+  User.findByIdAndRemove({_id: req.params.id}).then((user) => {
+    res.send(user);
   });
 });
 

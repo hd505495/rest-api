@@ -23,11 +23,5 @@ app.use((err, req, res, next) => {
 });
 
 const PORT = process.env.PORT || 7000;
- /*
-app.get('/', (req, res) => {
-  console.log(`HTTP Method: ${req.method}`);
-  res.end();
-});
-*/
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
