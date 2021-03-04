@@ -4,16 +4,15 @@ const User = require('../models/user');
 
 // Get all users
 router.get('/', (req, res) => {
-  res.send({
-    Method: req.method
+  User.find({}).then((users) => {
+    res.send(users);
   });
 });
 
 // Get one user by id
 router.get('/:id', (req, res) => {
-  res.send({
-    Method: req.method,
-    id: req.params.id
+  User.findById({_id: req.params.id}).then((user) => {
+    res.send(user);
   });
 });
 
